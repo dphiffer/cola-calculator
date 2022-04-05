@@ -11,5 +11,5 @@ Takes a start date and salary to calculate pro-rated wage increases based on SSA
 Run the following command to compile `cola.dist.js`:
 
 ```
-$ npx webpack --config webpack.config.js
+$ npm run build
 ```
