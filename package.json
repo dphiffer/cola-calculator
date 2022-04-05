@@ -4,7 +4,8 @@
   "description": "Takes a start date and salary to calculate pro-rated wage increases based on SSA’s Cost of Living Adjustment percentage.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack --config webpack.config.js"
   },
   "engines": {
     "node": ">=16"
