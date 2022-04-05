@@ -2,6 +2,42 @@ import { parseISO } from 'date-fns';
 
 // See: https://www.ssa.gov/oact/cola/colaseries.html
 var cola = {
+	'1975': 0.08,
+	'1976': 0.064,
+	'1977': 0.059,
+	'1978': 0.065,
+	'1979': 0.099,
+	'1980': 0.143,
+	'1981': 0.112,
+	'1982': 0.074,
+	'1983': 0.035,
+	'1984': 0.035,
+	'1985': 0.031,
+	'1986': 0.013,
+	'1987': 0.042,
+	'1988': 0.04,
+	'1989': 0.047,
+	'1990': 0.054,
+	'1991': 0.037,
+	'1992': 0.03,
+	'1993': 0.026,
+	'1994': 0.028,
+	'1995': 0.026,
+	'1996': 0.029,
+	'1997': 0.021,
+	'1998': 0.013,
+	'1999': 0.025,
+	'2000': 0.035,
+	'2001': 0.026,
+	'2002': 0.014,
+	'2003': 0.021,
+	'2004': 0.027,
+	'2005': 0.041,
+	'2006': 0.033,
+	'2007': 0.023,
+	'2008': 0.058,
+	'2009': 0,
+	'2010': 0,
 	'2011': 0.036,
 	'2012': 0.017,
 	'2013': 0.015,
@@ -72,8 +108,13 @@ function calculate(start, salary) {
 		let annualCola = colaSalary * colaPercent;
 		let proRatedCola = yearPercent * annualCola;
 
-		result.push(`add ${formatAmount(proRatedCola)} [${formatPercent(colaPercent)} &times; ${formatAmount(colaSalary)} = ${formatAmount(annualCola)}, ` +
-		            `pro-rated over ${formatPercent(yearPercent)} of the year]`);
+		let delta = `add ${formatAmount(proRatedCola)} [${formatPercent(colaPercent)} &times; ${formatAmount(colaSalary)}`;
+		if (1 - yearPercent > 1/365) {
+			delta += ` = ${formatAmount(annualCola)}, ` +
+			         `pro-rated over ${formatPercent(yearPercent)} of the year`;
+		}
+		delta += ']';
+		result.push(delta);
 		colaSalary += proRatedCola;
 		result.push(`${year}-12-31: ${formatAmount(colaSalary)}`);
 		when = yearEnd;
@@ -92,8 +133,8 @@ function validate(start, salary) {
 	if (! start.match(/^\d{4}-\d{2}-\d{2}$/)) {
 		result.push('Error: Enter your start date in YYYY-MM-DD format.');
 	}
-	if (start < '2011-01-01') {
-		result.push('Error: Enter a start date after 2011-01-01.');
+	if (start < '1975-01-01') {
+		result.push('Error: Enter a start date after 1975-01-01.');
 	}
 	if (start > '2022-01-01') {
 		result.push('Error: Enter a start date before 2022-01-01.');
