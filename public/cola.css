@@ -1,0 +1,37 @@
+body {
+	padding: 20px;
+	margin: 0;
+	font-family: sans-serif;
+	font-size: 18px;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+label {
+	display: block;
+}
+
+input[type="text"] {
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 20px;
+	font-size: 18px;
+}
+
+input[type="submit"] {
+	font-size: 18px;
+}
+
+#result {
+	display: none;
+	padding: 20px;
+	margin-top: 20px;
+	background: #dedede;
+	font-family: menlo, monospace;
+}
+
+#result.visible {
+	display: block;
+}

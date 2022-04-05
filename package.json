@@ -1,0 +1,21 @@
+{
+  "name": "cola-calculator",
+  "version": "0.0.1",
+  "description": "Takes a start date and salary to calculate pro-rated wage increases based on SSA’s Cost of Living Adjustment percentage.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "date-fns": "^2.28.0",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "fastify": "^3.28.0",
+    "fastify-static": "^4.6.1"
+  }
+}

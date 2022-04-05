@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Cost of Living Adjustment calculator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="cola.css">
+	</head>
+	<body>
+		<form action="." id="cola">
+			<h1>Cost of Living Adjustment calculator</h1>
+			<p>Applies a pro-rated increase in wages based on <a href="https://www.ssa.gov/oact/cola/colaseries.html">Social Security Cost-of-Living Adjustment percentages</a>.</p>
+			<label for="start">Start date</label>
+			<input type="text" id="start" name="start" placeholder="YYYY-MM-DD">
+			<label for="salary">Starting salary</label>
+			<input type="text" id="salary" name="salary" placeholder="$105,000">
+			<input type="submit" value="Calculate COLA">
+		</form>
+		<div id="result"></div>
+		<script src="cola.dist.js"></script>
+	</body>
+</html>
