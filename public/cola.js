@@ -82,7 +82,7 @@ function escape(value) {
 function calculate(start, salary) {
 
 	start = start.replace(/[^0-9-]/g, '');
-	salary = salary.replace(/\D/g, '');
+	salary = salary.replace(/[,\$]/g, '');
 	salary = parseInt(salary, 10);
 
 	var result = validate(start, salary);
