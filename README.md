@@ -4,7 +4,7 @@ https://cola-calculator.glitch.me/
 
 Takes a start date and pay to calculate pro-rated annual wage increases based on SSA’s Cost of Living Adjustment percentages.
 
-## Install, Build, run
+## Install, build, run
 
 ```
 npm install
