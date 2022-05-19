@@ -79,20 +79,20 @@ function escape(value) {
 }
 
 // Returns an HTML string with COLA adjusted wages (or a list of errors)
-function calculate(start, salary) {
+function calculate(start, pay) {
 
 	start = start.replace(/[^0-9-]/g, '');
-	salary = salary.replace(/[,\$]/g, '');
-	salary = parseInt(salary, 10);
+	pay = pay.replace(/[,\$]/g, '');
+	pay = parseInt(pay, 10);
 
-	var result = validate(start, salary);
+	var result = validate(start, pay);
 	if (result.length > 0) {
 		return result.join('<br>');
 	}
 
-	var colaSalary = salary;
+	var colaPay = pay;
 	var when = parseISO(start).getTime();
-	result.push(`${start}: ${formatAmount(salary)}`);
+	result.push(`${start}: ${formatAmount(pay)}`);
 
 	for (let year in cola) {
 
@@ -105,30 +105,30 @@ function calculate(start, salary) {
 
 		let yearPercent = (yearEnd - when) / (yearEnd - yearStart);
 		let colaPercent = cola[year];
-		let annualCola = colaSalary * colaPercent;
+		let annualCola = colaPay * colaPercent;
 		let proRatedCola = yearPercent * annualCola;
 
-		let delta = `add ${formatAmount(proRatedCola)} [${formatPercent(colaPercent)} &times; ${formatAmount(colaSalary)}`;
+		let delta = `add ${formatAmount(proRatedCola)} [${formatPercent(colaPercent)} &times; ${formatAmount(colaPay)}`;
 		if (1 - yearPercent > 1/365) {
 			delta += ` = ${formatAmount(annualCola)}, ` +
 			         `pro-rated over ${formatPercent(yearPercent)} of the year`;
 		}
 		delta += ']';
 		result.push(delta);
-		colaSalary += proRatedCola;
-		result.push(`${year}-12-31: ${formatAmount(colaSalary)}`);
+		colaPay += proRatedCola;
+		result.push(`${year}-12-31: ${formatAmount(colaPay)}`);
 		when = yearEnd;
 	}
 
 	var base = `${location.protocol}//${location.host}${location.pathname}`;
-	var url = `${base}?start=${escape(start)}&salary=${escape(salary)}`;
+	var url = `${base}?start=${escape(start)}&pay=${escape(pay)}`;
 	result.push(`<br><a href="${url}">Link to this result</a>`);
 
 	return result.join('<br>');
 }
 
 // Make sure the inputs are valid
-function validate(start, salary) {
+function validate(start, pay) {
 	var result = [];
 	if (! start.match(/^\d{4}-\d{2}-\d{2}$/)) {
 		result.push('Error: Enter your start date in YYYY-MM-DD format.');
@@ -139,8 +139,8 @@ function validate(start, salary) {
 	if (start > '2022-01-01') {
 		result.push('Error: Enter a start date before 2022-01-01.');
 	}
-	if (isNaN(salary) || salary < 1000) {
-		result.push('Error: Enter an annual salary of at least $1,000. To calculate from an hourly wage, <a href="https://www.indeed.com/career-advice/pay-salary/convert-hourly-to-salary">try this converter</a>.');
+	if (isNaN(pay) || pay < 0) {
+		result.push('Error: Enter an amount of at least $1 (hourly wage or salary).');
 	}
 	return result;
 }
@@ -148,33 +148,33 @@ function validate(start, salary) {
 (() => {
 
 	var startInput = document.getElementById('start');
-	var salaryInput = document.getElementById('salary');
+	var payInput = document.getElementById('pay');
 	var start = null;
-	var salary = null;
+	var pay = null;
 
 	var params = new URLSearchParams(window.location.search);
 	if (params.has('start')) {
 		start = params.get('start');
 		startInput.value = start;
 	}
-	if (params.has('salary')) {
-		salary = params.get('salary');
-		salaryInput.value = salary;
+	if (params.has('pay')) {
+		pay = params.get('pay');
+		payInput.value = pay;
 	}
 
-	var handleSubmit = (start, salary) => {
-		var result = calculate(start, salary);
+	var handleSubmit = (start, pay) => {
+		var result = calculate(start, pay);
 		document.getElementById('result').innerHTML = result;
 		document.getElementById('result').classList.add('visible');
 	};
 	var form = document.getElementById('cola');
 	form.addEventListener('submit', e => {
 		e.preventDefault();
-		handleSubmit(startInput.value, salaryInput.value);
+		handleSubmit(startInput.value, payInput.value);
 	}, false);
 
-	if (start && salary) {
-		handleSubmit(start, salary);
+	if (start && pay) {
+		handleSubmit(start, pay);
 	}
 
 })();
