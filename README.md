@@ -1,19 +1,22 @@
 # Cost of Living Adjustment Calculator
 
-Takes a start date and salary to calculate pro-rated wage increases based on SSA’s Cost of Living Adjustment percentage.
+https://cola-calculator.glitch.me/
 
-## Building
+Takes a start date and pay to calculate pro-rated annual wage increases based on SSA’s Cost of Living Adjustment percentages.
 
-To compile `cola.dist.js`:
+## Install, Build, run
 
 ```
-$ npm run build
+npm install
+npm run build
+npm serve
 ```
 
-## Runs on Glitch
+## Code sources
 
-[cola-calculator.glitch.me](https://cola-calculator.glitch.me/) ([edit](https://glitch.com/edit/#!/cola-calculator))
+* [GitHub](https://github.com/dphiffer/cola-calculator)
+* [Glitch](https://glitch.com/edit/#!/cola-calculator)
 
-## COLA data source
+## Data source
 
 * https://www.ssa.gov/oact/cola/colaseries.html
